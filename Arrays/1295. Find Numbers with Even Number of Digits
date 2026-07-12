@@ -1,0 +1,16 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int even = 0;
+        for(int num: nums){
+            int i = 0;
+            while(num>0){
+                num = num / 10;
+                i++;
+            }
+            if (i%2==0){
+                even++;
+            }
+        }
+        return even;
+    }
+}
