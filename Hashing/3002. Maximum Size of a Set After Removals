@@ -1,0 +1,23 @@
+import java.util.*;
+class Solution {
+    public int maximumSetSize(int[] nums1, int[] nums2) {
+        Set<Integer> s1 = new HashSet(); 
+        Set<Integer> s2 = new HashSet();
+        int common = 0;
+        for(int num : nums1){
+            s1.add(num);
+        }
+        for(int num : nums2){
+            s2.add(num);
+        }
+        for (int num : s1) {
+            if (s2.contains(num)) common++;
+        }
+        int n = nums1.length, n1 = s1.size(), n2 = s2.size();
+        int uniq1= n1 - common, uniq2 = n2- common;
+        if(uniq1 >= n/2 && uniq2 >= n/2) return n;
+        if (uniq1 < n / 2 && uniq2 < n / 2) return Math.min(n, uniq1 + uniq2 + common);
+        if (uniq1 < n / 2) return Math.min(n / 2, uniq1 + common) + n/2;
+        return Math.min(n / 2, uniq2 + common) + n/2;
+    }
+}
