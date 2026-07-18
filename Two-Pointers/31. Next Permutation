@@ -1,0 +1,33 @@
+class Solution {
+    public void swap(int arr[], int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j]= temp;
+    }
+    public void reverse(int arr[], int i, int j){
+        while(i<j){
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j]= temp;
+            i++;
+            j--;
+        }
+    }
+    public void nextPermutation(int[] nums) {
+        int i = nums.length -1, j = nums.length-1;
+        // finding first decreasing from right side
+        while(i>0 && nums[i-1] >= nums[i]){
+            i--;
+        }
+        if(i==0){
+            reverse(nums, 0, nums.length-1); //if none then reverse whole 
+            return;
+        }
+        // finding just small element from i
+        while(j>=i && nums[j] <= nums[i-1]){
+            j--;
+        }
+        swap(nums, i-1, j);
+        reverse(nums, i, nums.length-1);
+    }
+}
