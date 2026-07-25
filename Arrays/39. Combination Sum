@@ -1,0 +1,20 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        makecom(candidates, target, 0, new ArrayList<>(), res, 0);
+        return res;
+    }
+    public void makecom(int []arr,int target, int sum, List<Integer> com, List<List<Integer>> res, int index){
+        if(sum == target){
+            res.add(new ArrayList<>(com));
+            return;
+        }
+        if(sum>target || index >= arr.length){
+            return;
+        }
+        com.add(arr[index]);
+        makecom(arr, target, sum + arr[index], com, res, index);
+        com.remove(com.size() - 1);
+        makecom(arr, target, sum, com, res, index+1);
+    }
+}
