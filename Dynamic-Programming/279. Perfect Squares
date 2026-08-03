@@ -1,0 +1,19 @@
+class Solution {
+    public int numSquares(int n) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for(int i =1; i*i <= n; i++){
+            arr.add(i*i);
+        }
+        int [] dp = new int[n+1];
+        dp[0] = 0;
+        for(int i =1; i< n+1; i++){
+            dp[i] = dp[i-1] + 1;
+            for(int j =0; j < arr.size() ;j++){
+                if(arr.get(j) <= i){
+                    dp[i] = Math.min(dp[i], dp[i- arr.get(j)] +1);
+                }
+            }
+        }
+        return dp[n];
+    }
+}
