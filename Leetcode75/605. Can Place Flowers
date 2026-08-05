@@ -1,0 +1,24 @@
+class Solution {
+    public boolean canPlaceFlowers(int[] bed, int n) {
+        int k = bed.length ;
+
+        if (n==0) return true;
+        if(k == 1 && bed[0] ==0 ) return n==1; 
+        if(bed[0] == 0 && bed[1] != 1){
+            n--;
+            bed[0] =1;
+        }
+        
+        for(int i=1; i< bed.length-1 ; i++){
+            if(bed[i] == 0 && bed[i-1] != 1 && bed[i+1] != 1 ){
+                n--;
+                bed[i] = 1;
+            }
+        }
+        if(bed[k-1] == 0 && bed[k-2] != 1){
+            n--;
+            bed[k-1] =1;
+        }
+        return n <=0;
+    }
+}
