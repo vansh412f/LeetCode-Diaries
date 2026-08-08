@@ -1,0 +1,19 @@
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int start =0;
+        int end = nums.length-1;
+        int count =0;
+        while(start<end){
+            int curr = nums[start] + nums[end];
+            if(k == curr){
+                count++; start++; end--;
+            }else if(k> curr){
+                start++;
+            }else if(k< curr){
+                end--;
+            }
+        }
+        return count;
+    }
+}
