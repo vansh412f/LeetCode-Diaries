@@ -1,0 +1,11 @@
+-- Write your PostgreSQL query statement below
+SELECT visited_on,
+       SUM(SUM(amount)) OVER last_week AS amount,
+       ROUND(AVG(SUM(amount)) OVER last_week, 2) AS average_amount
+  FROM customer
+ GROUP BY visited_on
+WINDOW last_week AS (ORDER BY visited_on
+                      ROWS BETWEEN 6 PRECEDING
+                               AND CURRENT ROW)
+ ORDER BY visited_on
+ OFFSET 6;
