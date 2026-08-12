@@ -1,0 +1,4 @@
+SELECT user_id,
+       concat(UPPER(LEFT(LOWER(name), 1)), SUBSTRING(LOWER(name) FROM 2)) AS name
+FROM Users
+ORDER BY user_id;
