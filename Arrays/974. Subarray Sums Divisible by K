@@ -1,0 +1,20 @@
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        // could be done using hashmap like 560
+        // but since we need to check remainders arrays is optimal
+        int n = nums.length;
+        int curr = 0;
+        int count =0;
+        int [] rem = new int[k];
+        rem[0] = 1;
+        for(int num: nums){
+            curr += num;
+            int r = (curr % k + k) % k;
+            if(rem[r] > 0){
+                count += rem[r];
+            }
+            rem[r]++;
+        }
+        return count;
+    }
+}
