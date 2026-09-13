@@ -1,0 +1,17 @@
+class Solution {
+    public int numTilings(int n) {
+        if(n == 1) return 1;
+        if(n == 2) return 2;
+        if(n == 3) return 5;
+        int mod = (int)1e9 + 7;
+        int a = 1;
+        int b = 2;
+        int c = 5;
+        int d = 2*c + a;
+        for(int i =4; i< n+1; i++){
+            d = (int)(((long)2*c + a )% mod);
+            a=b; b=c; c=d;
+        }
+        return d;
+    }
+}
