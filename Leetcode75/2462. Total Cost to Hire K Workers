@@ -1,0 +1,33 @@
+class Solution {
+    public long totalCost(int[] costs, int k, int candidates) {
+        PriorityQueue<Integer> pqleft = new PriorityQueue<>();
+        PriorityQueue<Integer> pqright = new PriorityQueue<>();
+        int left = 0;
+        int right = costs.length - 1;
+        long sum = 0;
+        while(left <= right && pqleft.size() < candidates){
+            pqleft.add(costs[left]);
+            left++;
+        }
+        while(left <= right && pqright.size() < candidates){
+            pqright.add(costs[right]);
+            right--;
+        }
+        while(k-- >0){
+            if(pqright.isEmpty() || (!pqleft.isEmpty() && pqleft.peek() <= pqright.peek())){
+                sum += (long) pqleft.poll();
+                if(left <= right){
+                    pqleft.add(costs[left]);
+                    left++;
+                }
+            } else{
+                sum += (long) pqright.poll();
+                if(left <= right){
+                    pqright.add(costs[right]);
+                    right--;
+                }
+            }
+        }
+        return sum;
+    }
+}
