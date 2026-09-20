@@ -1,0 +1,29 @@
+class Solution {
+    int count = 0;
+    public int beautifulSubsets(int[] nums, int k){
+        Arrays.sort(nums);
+        back(nums, k , 0, new ArrayList<>());
+        return count;
+    }
+    public void back(int[] nums, int k, int index, List<Integer> list){
+        if(index == nums.length) {
+            if(!list.isEmpty()) count ++;
+            return;
+        }
+        // pick
+        if(canPick(list, nums[index], k)){
+            list.add(nums[index]);
+            back(nums, k, index + 1, list);
+            list.remove(list.size() - 1);}
+        // nopick
+        back(nums, k, index+1, list);
+    }
+     public boolean canPick(List<Integer> list, int num, int k) {
+        for (int x : list) {
+            if (Math.abs(num - x) == k) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
