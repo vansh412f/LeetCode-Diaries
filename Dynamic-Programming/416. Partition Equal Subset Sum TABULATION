@@ -1,0 +1,28 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int n = nums.length ;
+        if (n == 1)
+            return false;
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum % 2 != 0)
+            return false;
+        int target = sum / 2;
+        boolean[][] dp = new boolean[n][target + 1];
+        dp[0][0] = true;
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < target + 1; j++) {
+                boolean pick = false;
+                if (j >= nums[i]) {
+                    pick = dp[i-1][j - nums[i]];
+                }
+                boolean nopick = dp[i-1][j];
+                dp[i][j] = pick || nopick;
+            }
+        }
+        return dp[n-1][target];
+    }
+}
