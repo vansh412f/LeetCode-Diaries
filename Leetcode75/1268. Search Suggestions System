@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        List<List<String>> res = new ArrayList<>();
+        Arrays.sort(products);
+        String prefix = "";
+        for(char ch : searchWord.toCharArray()){
+            prefix += ch;
+            List<String> curr = new ArrayList<>();
+            int left = find(products, prefix);
+            for(int i = left; i< Math.min(left + 3, products.length); i++){
+                if(products[i].startsWith(prefix)){
+                    curr.add(products[i]);
+                } else break;
+            }
+            res.add(curr);
+        }
+        return res;
+    }
+    public int find(String [] products, String prefix){
+        int low = 0;
+        int high = products.length;
+        while(low < high){
+            int mid = low + (high - low)/2;
+            if(products[mid].compareTo(prefix) < 0){
+                low = mid + 1;
+            } else{
+                high = mid;
+            }
+        }
+        return low;
+    }
+}
