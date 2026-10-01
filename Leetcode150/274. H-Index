@@ -1,0 +1,15 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int n  = citations.length;
+        PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
+        for(int num: citations){
+            max.offer(num);
+        }
+        int count = 0;
+        while(!max.isEmpty() && max.poll() > count){
+            count++;
+        }
+
+        return count;
+    }
+}
