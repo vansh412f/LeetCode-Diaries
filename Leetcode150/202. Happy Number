@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isHappy(int n) {
+        if(n == 1) return true;
+        HashSet<Integer> s = new HashSet<>();
+        boolean found = false;
+        int temp = n;
+        while(!found){
+            if(s.contains(temp)) return false;
+            s.add(temp);
+            int sum = 0;
+            while(temp != 0){
+                int digit = temp % 10;
+                sum += digit*digit;
+                temp /= 10;
+            }
+            temp = sum;
+            if(temp == 1) return true;
+        }
+        return true;
+    }
+}
