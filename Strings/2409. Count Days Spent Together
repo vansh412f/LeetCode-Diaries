@@ -1,0 +1,32 @@
+class Solution {
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+        int arrivalDayAlice = Integer.parseInt(arriveAlice.substring(3,5));
+        int arrivalDayBob = Integer.parseInt(arriveBob.substring(3,5));
+        int leaveDayBob = Integer.parseInt(leaveBob.substring(3,5));
+        int leaveDayAlice = Integer.parseInt(leaveAlice.substring(3,5));
+        int arrivalMonAlice = Integer.parseInt(arriveAlice.substring(0,2));
+        int arrivalMonBob = Integer.parseInt(arriveBob.substring(0,2));
+        int leaveMonBob = Integer.parseInt(leaveBob.substring(0,2));
+        int leaveMonAlice = Integer.parseInt(leaveAlice.substring(0,2));
+
+        int [] arr = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        
+        for(int i =0; i< 12; i++){
+            if(arrivalMonAlice-1 > i){
+                arrivalDayAlice += arr[i];
+            }
+            if(arrivalMonBob-1 > i){
+                arrivalDayBob += arr[i];
+            }
+            if(leaveMonAlice-1 > i){
+                leaveDayAlice += arr[i];
+            }
+            if(leaveMonBob-1 > i){
+                leaveDayBob += arr[i];
+            }
+        }
+        int days = Math.min(leaveDayAlice, leaveDayBob) - Math.max(arrivalDayAlice, arrivalDayBob) +1;
+        if(days < 0) return 0;
+        return days ;
+    }
+}
