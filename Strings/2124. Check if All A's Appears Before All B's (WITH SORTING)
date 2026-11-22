@@ -1,0 +1,12 @@
+class Solution {
+    public boolean checkString(String s) {
+        char [] ch = s.toCharArray();
+        Arrays.sort(ch);
+        String sn = new String(ch);
+
+        if(sn.equals(s)){
+            return true;
+        }
+        return false;
+    }
+}
