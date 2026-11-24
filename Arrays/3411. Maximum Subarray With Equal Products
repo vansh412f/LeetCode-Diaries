@@ -1,0 +1,21 @@
+class Solution {
+    public int maxLength(int[] nums) {
+        int n = nums.length;
+        int ans = 2;
+        int left = 0;
+        int product = 1;
+        for(int right =0; right < n; right++){
+            while(gcd(product, nums[right]) > 1){
+                product /= nums[left];
+                left++;
+            }
+            product *= nums[right];
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+    public int gcd(int a, int b){
+        if(a == 0) return b;
+        else return gcd(b%a, a);
+    }
+}
