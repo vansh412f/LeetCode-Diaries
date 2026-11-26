@@ -1,0 +1,13 @@
+class Solution {
+    public boolean canAliceWin(int n) {
+        int a = 10;
+        while(n > 0){
+            n -= a;
+            if(n < 0) return false;
+            n -= a-1;
+            if(n < 0) return true;
+            a -= 2;
+        }
+        return false;
+    }
+}
