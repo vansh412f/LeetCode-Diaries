@@ -1,0 +1,51 @@
+class Solution {
+    public int maximumSaleItems(int[][] items, int budget) {
+        int n = items.length;
+        int [] free = new int [n];
+        for(int i = 0; i< n; i++){
+            for(int j =0; j<n ;j++){
+                if(i== j) continue;
+                if(items[j][0] % items[i][0] == 0){
+                    free[i]++;
+                }
+            }
+        }
+        int [][][] dp = new int[n+1][budget + 1][2];
+        for(int i= 0; i<n+1; i++){
+            for(int j =0; j< budget + 1; j++){
+                Arrays.fill(dp[i][j], -1);
+            }
+        }
+        return recur(items, budget, free, 0, 0, dp);
+
+    }
+    public int recur(int[][] items, int budget, int[] free, int index, int first, int [][][] dp ){
+        if(index == items.length){
+            dp[index][budget][0] = 0;
+            dp[index][budget][1] = 0;
+            return 0;
+        }
+        int price = items[index][1];
+
+        if(first == 0){
+            if(dp[index][budget][0] != -1) return dp[index][budget][0];
+            int nopick = recur(items, budget, free, index + 1, 0, dp);
+            int pick = 0;
+            if(budget >= price){
+                pick = 1 + free[index] + recur(items, budget - price, free, index, 1, dp);
+            }
+            dp[index][budget][0] = Math.max(nopick, pick);
+            return Math.max(nopick, pick);
+
+        } else{
+            if(dp[index][budget][1] != -1) return dp[index][budget][1];
+            int nopick = recur(items, budget, free, index + 1, 0, dp);
+            int pick = 0;
+            if(budget >= price){
+                pick = 1 + recur(items, budget - price, free, index, 1, dp);
+            }
+            dp[index][budget][1] = Math.max(nopick, pick);
+            return Math.max(nopick, pick);
+        }
+    }
+}
